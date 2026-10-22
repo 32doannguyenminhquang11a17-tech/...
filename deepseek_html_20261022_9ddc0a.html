@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nguyễn Văn Kha - Portfolio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Times New Roman',Times,serif}
+body{background:#f4f7fc;color:#333;line-height:1.6;font-family:'Times New Roman',Times,serif;background-size:cover;background-position:center;background-attachment:fixed;background-repeat:no-repeat;transition:background .5s ease}
+body.has-bg-image{background-color:#1e3c72}
+body.has-bg-image::before{content:'';position:fixed;inset:0;background:rgba(255,255,255,.88);z-index:0;pointer-events:none}
+body.has-bg-image>*{position:relative;z-index:1}
+nav{background:#1e3c72;padding:15px 40px;display:flex;justify-content:center;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+nav ul{list-style:none;display:flex;gap:25px;align-items:center}
+nav ul li{position:relative}
+nav ul li a{color:#fff;text-decoration:none;font-weight:500;transition:.3s;padding:8px 12px;border-radius:5px;font-size:1.05rem;display:inline-flex;align-items:center;gap:6px}
+nav ul li a:hover,nav ul li a.active{background:#2a5298}
+.dropdown-arrow{font-size:.7rem;transition:transform .3s;display:inline-block}
+nav ul li.has-dropdown.open .dropdown-arrow{transform:rotate(180deg)}
+.dropdown-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(-10px);background:#fff;border-radius:10px;box-shadow:0 8px 25px rgba(0,0,0,.2);min-width:200px;padding:8px 0;opacity:0;visibility:hidden;transition:.3s;margin-top:8px;z-index:110}
+nav ul li.has-dropdown.open .dropdown-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.dropdown-menu::before{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:8px solid #fff}
+.dropdown-menu li{list-style:none}
+.dropdown-menu li a{color:#1e3c72;display:block;padding:10px 20px;border-radius:6px;margin:0 8px;font-weight:500;white-space:nowrap}
+.dropdown-menu li a:hover,.dropdown-menu li a.active{background:#e8eef8;color:#2a5298}
+@media(max-width:768px){
+.dropdown-menu{position:static;transform:none;opacity:1;visibility:visible;box-shadow:none;margin-top:5px;padding:0;background:#2a5298;display:none}
+nav ul li.has-dropdown.open .dropdown-menu{display:block;transform:none}
+.dropdown-menu::before{display:none}
+.dropdown-menu li a{color:#fff;margin:0;padding:8px 15px}
+.dropdown-menu li a:hover{background:#1e3c72;color:#fff}
+}
+.page{display:none;padding:50px 40px;max-width:1100px;margin:0 auto;animation:fadeIn .5s ease;background:transparent;position:relative}
+.page.active{display:block}
+/* Nền cho từng section */
+.page.has-section-bg{padding:0}
+.page.has-section-bg .page-inner{padding:50px 40px;position:relative;z-index:1;background-size:cover;background-position:center;background-attachment:fixed;border-radius:15px;margin:20px auto;max-width:1100px}
+.page.has-section-bg .page-inner::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.88);z-index:0;border-radius:15px}
+.page.has-section-bg .page-inner>*{position:relative;z-index:1}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.hero{position:relative;display:flex;align-items:center;justify-content:center;gap:30px;padding:60px 20px;background:linear-gradient(135deg,#1e3c72,#2a5298);color:#fff;border-radius:15px;margin-bottom:40px;flex-wrap:wrap;transition:background .5s ease;background-size:cover;background-position:center;overflow:hidden}
+.hero.using-image::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:1;border-radius:15px}
+.hero>*{position:relative;z-index:2}
+.hero-avatar-wrapper{position:relative;flex-shrink:0}
+.hero-avatar{width:150px;height:150px;border-radius:50%;border:5px solid #fff;box-shadow:0 8px 25px rgba(0,0,0,.3);background:#fff;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:4rem;font-weight:bold;color:#1e3c72}
+.hero-avatar img{width:100%;height:100%;object-fit:cover}
+.change-avatar-btn{position:absolute;bottom:0;right:0;width:42px;height:42px;border-radius:50%;background:#fff;color:#1e3c72;border:2px solid #1e3c72;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;box-shadow:0 3px 10px rgba(0,0,0,.2);transition:.3s;z-index:5}
+.change-avatar-btn:hover{background:#1e3c72;color:#fff;transform:scale(1.1) rotate(15deg)}
+.change-bg-btn{position:absolute;top:15px;right:15px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.85);color:#1e3c72;border:2px solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;box-shadow:0 3px 10px rgba(0,0,0,.25);transition:.3s;z-index:10}
+.change-bg-btn:hover{background:#fff;transform:scale(1.1) rotate(15deg)}
+.bg-panel{position:absolute;top:65px;right:15px;background:#fff;border-radius:12px;padding:15px;box-shadow:0 8px 30px rgba(0,0,0,.25);z-index:20;display:none;width:280px;color:#333}
+.bg-panel.show{display:block;animation:fadeIn .25s ease}
+.bg-panel h4{color:#1e3c72;font-size:1rem;margin-bottom:10px;text-align:center}
+.bg-options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.bg-swatch{width:100%;height:50px;border-radius:8px;cursor:pointer;border:3px solid transparent;transition:.2s;position:relative}
+.bg-swatch:hover{transform:scale(1.08)}
+.bg-swatch.active{border-color:#ffd700;box-shadow:0 0 0 2px #1e3c72}
+.bg-swatch.active::after{content:'✓';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-weight:bold;font-size:1.2rem;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.upload-bg-section{margin-top:15px;padding-top:15px;border-top:1px solid #e0e6f0;display:flex;flex-direction:column;gap:8px}
+.upload-bg-btn{width:100%;padding:10px;background:#1e3c72;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:.95rem;transition:.3s;font-family:'Times New Roman',Times,serif}
+.upload-bg-btn:hover{background:#2a5298}
+.page-bg-section{margin-top:12px;padding-top:12px;border-top:1px solid #e0e6f0;display:flex;flex-direction:column;gap:8px}
+.page-bg-btn{width:100%;padding:10px;background:#2a5298;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:.9rem;transition:.3s;font-family:'Times New Roman',Times,serif}
+.page-bg-btn:hover{background:#1e3c72;transform:translateY(-1px)}
+.reset-bg-btn{width:100%;padding:8px;background:#fff;color:#e74c3c;border:2px solid #e74c3c;border-radius:8px;cursor:pointer;font-weight:600;font-size:.9rem;transition:.3s;font-family:'Times New Roman',Times,serif}
+.reset-bg-btn:hover{background:#e74c3c;color:#fff}
+.hero-text h1{font-size:3rem;margin-bottom:10px;font-weight:700}
+.hero-text p{font-size:1.3rem;opacity:.9;font-style:italic}
+.intro-block{background:#fff;border-radius:15px;padding:35px;box-shadow:0 6px 25px rgba(0,0,0,0.1);margin-bottom:40px;display:grid;grid-template-columns:300px 1fr;gap:35px;align-items:center;border-top:5px solid #2a5298}
+.intro-photo-wrapper{position:relative;border-radius:15px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.15);background:linear-gradient(135deg,#e8eef8,#d4e0f0);display:flex;align-items:center;justify-content:center;min-height:320px;transition:box-shadow .3s}
+.intro-photo-wrapper:hover{box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+.intro-photo-wrapper img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
+.intro-photo-placeholder{text-align:center;color:#7a8aa5;padding:25px;z-index:1}
+.intro-photo-placeholder .big-icon{font-size:3.5rem;display:block;margin-bottom:12px;opacity:.6}
+.intro-photo-placeholder p{font-size:.95rem;font-weight:500;margin-bottom:12px}
+.intro-photo-link{display:inline-flex;align-items:center;justify-content:center;width:55px;height:55px;border-radius:50%;background:#fff;border:2px dashed #2a5298;cursor:pointer;transition:.3s;text-decoration:none;font-size:1.6rem}
+.intro-photo-link:hover{background:#2a5298;border-style:solid;transform:scale(1.1) rotate(8deg);box-shadow:0 6px 20px rgba(42,82,152,.35)}
+.intro-photo-edit-btn{position:absolute;bottom:12px;right:12px;width:42px;height:42px;border-radius:50%;background:#fff;color:#1e3c72;border:2px solid #1e3c72;display:none;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;box-shadow:0 4px 12px rgba(0,0,0,.25);transition:.3s;z-index:5}
+.intro-photo-edit-btn:hover{background:#1e3c72;color:#fff;transform:scale(1.1) rotate(15deg)}
+.intro-photo-wrapper.has-image .intro-photo-edit-btn{display:flex}
+.intro-photo-wrapper.has-image .intro-photo-placeholder{display:none}
+.intro-text h2{color:#1e3c72;font-size:2rem;margin-bottom:8px;font-weight:700}
+.intro-text .intro-subtitle{color:#2a5298;font-size:1.1rem;font-weight:600;margin-bottom:15px;font-style:italic}
+.intro-text p{color:#555;margin-bottom:12px;font-size:1.1rem;line-height:1.75}
+.intro-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.intro-tag{background:#e8eef8;color:#1e3c72;padding:6px 14px;border-radius:20px;font-size:.95rem;font-weight:600}
+@media(max-width:800px){.intro-block{grid-template-columns:1fr;gap:25px;padding:25px}.intro-photo-wrapper{min-height:260px}}
+
+.goals-block{display:grid;grid-template-columns:1fr 1fr;gap:25px;margin-bottom:40px}
+.goal-card{background:#fff;border-radius:15px;padding:35px 30px;box-shadow:0 6px 25px rgba(0,0,0,0.08);border-top:5px solid #2a5298;transition:transform .3s,box-shadow .3s}
+.goal-card:hover{transform:translateY(-5px);box-shadow:0 10px 35px rgba(0,0,0,0.15)}
+.goal-card.career{border-top-color:#2a5298}
+.goal-card.life{border-top-color:#e67e22}
+.goal-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid #e8eef8}
+.goal-icon{width:55px;height:55px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+.goal-card.career .goal-icon{background:linear-gradient(135deg,#1e3c72,#2a5298)}
+.goal-card.life .goal-icon{background:linear-gradient(135deg,#e67e22,#f39c12)}
+.goal-title{color:#1e3c72;font-size:1.5rem;font-weight:700;margin:0}
+.goal-card.life .goal-title{color:#d35400}
+.goal-subtitle{color:#888;font-size:.95rem;font-style:italic;margin-bottom:15px}
+.goal-card p{color:#555;font-size:1.05rem;line-height:1.8;margin-bottom:12px}
+.goal-card p:last-child{margin-bottom:0}
+@media(max-width:800px){.goals-block{grid-template-columns:1fr}}
+
+.hobby-page-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:20px}
+.hobby-page-item{background:#fff;border-radius:15px;padding:25px;box-shadow:0 6px 25px rgba(0,0,0,0.08);border-top:5px solid #9b59b6;transition:transform .3s,box-shadow .3s;text-align:center}
+.hobby-page-item:hover{transform:translateY(-6px);box-shadow:0 10px 35px rgba(155,89,182,.2)}
+.hobby-page-icon{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#9b59b6,#8e44ad);display:flex;align-items:center;justify-content:center;font-size:2.4rem;margin:0 auto 15px}
+.hobby-page-name{color:#8e44ad;font-size:1.3rem;font-weight:700;margin-bottom:8px}
+.hobby-page-desc{color:#666;font-size:1rem;line-height:1.6}
+
+.vision-mission{display:grid;grid-template-columns:1fr 1fr;gap:25px;margin-top:30px}
+.card{background:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.08);transition:transform .3s}
+.card:hover{transform:translateY(-5px)}
+.card h3{color:#1e3c72;margin-bottom:15px;font-size:1.5rem;border-left:4px solid #2a5298;padding-left:10px;font-weight:700}
+.card p{color:#555;font-size:1.1rem;line-height:1.75}
+
+.process-grid{display:grid;grid-template-columns:1fr;gap:30px;margin-top:20px}
+.process-card{background:#fff;border-radius:15px;box-shadow:0 6px 25px rgba(0,0,0,0.08);overflow:hidden;display:grid;grid-template-columns:300px 1fr;border-left:6px solid #2a5298;transition:transform .3s,box-shadow .3s}
+.process-card:hover{transform:translateY(-4px);box-shadow:0 12px 35px rgba(0,0,0,0.12)}
+.process-photo-wrapper{position:relative;background:linear-gradient(135deg,#e8eef8,#d4e0f0);display:flex;align-items:center;justify-content:center;min-height:260px;overflow:hidden;cursor:pointer}
+.process-photo-wrapper img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
+.process-photo-placeholder{text-align:center;color:#7a8aa5;padding:20px;z-index:1}
+.process-photo-placeholder .big-icon{font-size:3rem;display:block;margin-bottom:10px;opacity:.6}
+.process-photo-placeholder p{font-size:.9rem;font-weight:500;margin-bottom:12px}
+.process-photo-link{display:inline-flex;align-items:center;justify-content:center;width:50px;height:50px;border-radius:50%;background:#fff;border:2px dashed #2a5298;cursor:pointer;transition:.3s;text-decoration:none;font-size:1.5rem}
+.process-photo-link:hover{background:#2a5298;border-style:solid;transform:scale(1.1) rotate(8deg);box-shadow:0 6px 20px rgba(42,82,152,.35)}
+.process-photo-edit-btn{position:absolute;bottom:12px;right:12px;width:42px;height:42px;border-radius:50%;background:#fff;color:#1e3c72;border:2px solid #1e3c72;display:none;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;box-shadow:0 4px 12px rgba(0,0,0,.25);transition:.3s;z-index:5}
+.process-photo-edit-btn:hover{background:#1e3c72;color:#fff;transform:scale(1.1) rotate(15deg)}
+.process-photo-wrapper.has-image .process-photo-edit-btn{display:flex}
+.process-photo-wrapper.has-image .process-photo-placeholder{display:none}
+.process-content{padding:30px 35px;display:flex;flex-direction:column;justify-content:center}
+.process-content h3{color:#1e3c72;font-size:1.5rem;font-weight:700;margin-bottom:5px}
+.process-time{color:#2a5298;font-weight:600;font-size:1rem;margin-bottom:15px;font-style:italic;display:inline-block;background:#e8eef8;padding:4px 14px;border-radius:15px}
+.process-content p{color:#555;font-size:1.05rem;line-height:1.8;margin-bottom:10px}
+.process-content p:last-child{margin-bottom:0}
+@media(max-width:800px){.process-card{grid-template-columns:1fr}.process-photo-wrapper{min-height:220px}}
+
+h2.section-title{color:#1e3c72;margin-bottom:25px;font-size:2.2rem;border-bottom:3px solid #2a5298;padding-bottom:10px;display:inline-block;font-weight:700}
+
+.projects-grid{display:grid;grid-template-columns:1fr;gap:35px;margin-top:20px}
+.project-card{background:#fff;border-radius:15px;box-shadow:0 6px 25px rgba(0,0,0,0.08);overflow:hidden;display:grid;grid-template-columns:340px 1fr;border-left:6px solid #2a5298;transition:transform .3s,box-shadow .3s}
+.project-card:hover{transform:translateY(-4px);box-shadow:0 12px 35px rgba(0,0,0,0.12)}
+.project-photo-wrapper{position:relative;background:linear-gradient(135deg,#e8eef8,#d4e0f0);display:flex;align-items:center;justify-content:center;min-height:300px;overflow:hidden;cursor:pointer}
+.project-photo-wrapper img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
+.project-photo-placeholder{text-align:center;color:#7a8aa5;padding:20px;z-index:1}
+.project-photo-placeholder .big-icon{font-size:3.5rem;display:block;margin-bottom:12px;opacity:.6}
+.project-photo-placeholder p{font-size:.95rem;font-weight:500;margin-bottom:12px}
+.project-photo-link{display:inline-flex;align-items:center;justify-content:center;width:55px;height:55px;border-radius:50%;background:#fff;border:2px dashed #2a5298;cursor:pointer;transition:.3s;text-decoration:none;font-size:1.6rem}
+.project-photo-link:hover{background:#2a5298;border-style:solid;transform:scale(1.1) rotate(8deg);box-shadow:0 6px 20px rgba(42,82,152,.35)}
+.project-photo-edit-btn{position:absolute;bottom:15px;right:15px;width:48px;height:48px;border-radius:50%;background:#fff;color:#1e3c72;border:2px solid #1e3c72;display:none;align-items:center;justify-content:center;cursor:pointer;font-size:1.3rem;box-shadow:0 4px 15px rgba(0,0,0,.25);transition:.3s;z-index:5}
+.project-photo-edit-btn:hover{background:#1e3c72;color:#fff;transform:scale(1.1) rotate(15deg)}
+.project-photo-wrapper.has-image .project-photo-edit-btn{display:flex}
+.project-photo-wrapper.has-image .project-photo-placeholder{display:none}
+.project-content{padding:30px 35px;display:flex;flex-direction:column;justify-content:center}
+.project-title{color:#1e3c72;font-size:1.6rem;font-weight:700;margin-bottom:10px}
+.project-role{display:inline-block;background:#e8eef8;color:#2a5298;padding:5px 15px;border-radius:15px;font-size:.95rem;font-weight:600;font-style:italic;margin-bottom:18px;align-self:flex-start}
+.project-desc{color:#555;font-size:1.05rem;line-height:1.85}
+.project-desc p{margin-bottom:10px}
+.project-desc p:last-child{margin-bottom:0}
+@media(max-width:900px){.project-card{grid-template-columns:1fr}.project-photo-wrapper{min-height:240px}}
+
+/* ===== CV - TẢI ẢNH ===== */
+.cv-lang-tabs{display:flex;justify-content:center;gap:15px;margin-bottom:30px;flex-wrap:wrap}
+.cv-lang-btn{background:#fff;color:#1e3c72;border:2px solid #1e3c72;padding:12px 28px;border-radius:30px;cursor:pointer;font-size:1.05rem;font-weight:700;transition:.3s;font-family:'Times New Roman',Times,serif;display:inline-flex;align-items:center;gap:8px}
+.cv-lang-btn:hover{background:#e8eef8;transform:translateY(-2px)}
+.cv-lang-btn.active{background:linear-gradient(135deg,#1e3c72,#2a5298);color:#fff;border-color:#1e3c72;box-shadow:0 5px 15px rgba(30,60,114,.3)}
+.cv-lang-btn .flag{font-size:1.2rem}
+.cv-lang-content{display:none;animation:fadeIn .4s ease}
+.cv-lang-content.active{display:block}
+.cv-photo-box{background:#fff;border-radius:15px;box-shadow:0 6px 25px rgba(0,0,0,0.1);padding:25px;max-width:900px;margin:0 auto}
+.cv-photo-frame{position:relative;width:100%;min-height:600px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#e8eef8,#d4e0f0);display:flex;align-items:center;justify-content:center;border:3px dashed #2a5298;transition:.3s}
+.cv-photo-frame.has-image{border-style:solid;border-color:#2a5298}
+.cv-photo-frame img{width:100%;height:auto;display:block;object-fit:contain}
+.cv-photo-placeholder{text-align:center;color:#7a8aa5;padding:40px}
+.cv-photo-placeholder .big-icon{font-size:5rem;display:block;margin-bottom:20px;opacity:.6}
+.cv-photo-placeholder h3{color:#1e3c72;font-size:1.4rem;margin-bottom:10px;font-weight:700}
+.cv-photo-placeholder p{font-size:1rem;margin-bottom:25px;color:#888}
+.cv-upload-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 35px;background:linear-gradient(135deg,#1e3c72,#2a5298);color:#fff;border:none;border-radius:30px;cursor:pointer;font-size:1.05rem;font-weight:700;transition:.3s;font-family:'Times New Roman',Times,serif;box-shadow:0 5px 15px rgba(30,60,114,.3)}
+.cv-upload-btn:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(30,60,114,.4)}
+.cv-photo-frame.has-image .cv-photo-placeholder{display:none}
+.cv-photo-actions{display:flex;justify-content:center;gap:15px;margin-top:20px;flex-wrap:wrap}
+.cv-action-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 25px;border-radius:25px;cursor:pointer;font-size:1rem;font-weight:600;transition:.3s;font-family:'Times New Roman',Times,serif;border:2px solid #1e3c72;background:#fff;color:#1e3c72}
+.cv-action-btn:hover{background:#1e3c72;color:#fff;transform:translateY(-2px)}
+.cv-action-btn.danger{border-color:#e74c3c;color:#e74c3c}
+.cv-action-btn.danger:hover{background:#e74c3c;color:#fff}
+
+/* ===== NÚT CHÈN ẢNH NỀN SECTION ===== */
+.section-bg-toggle{position:absolute;top:15px;right:15px;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#9b59b6,#8e44ad);color:#fff;border:2px solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.3rem;box-shadow:0 4px 15px rgba(155,89,182,.4);transition:.3s;z-index:50}
+.section-bg-toggle:hover{transform:scale(1.1) rotate(15deg);box-shadow:0 6px 20px rgba(155,89,182,.6)}
+.section-bg-panel{position:absolute;top:70px;right:15px;background:#fff;border-radius:12px;padding:20px;box-shadow:0 8px 30px rgba(0,0,0,.25);z-index:60;display:none;width:300px;color:#333}
+.section-bg-panel.show{display:block;animation:fadeIn .25s ease}
+.section-bg-panel h4{color:#1e3c72;font-size:1.1rem;margin-bottom:12px;text-align:center;font-weight:700}
+.section-bg-panel p{font-size:.9rem;color:#888;text-align:center;margin-bottom:15px;font-style:italic}
+.section-bg-panel button{width:100%;padding:12px;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:1rem;transition:.3s;font-family:'Times New Roman',Times,serif;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px}
+.section-bg-panel .btn-upload{background:linear-gradient(135deg,#9b59b6,#8e44ad);color:#fff}
+.section-bg-panel .btn-upload:hover{background:linear-gradient(135deg,#8e44ad,#9b59b6);transform:translateY(-2px);box-shadow:0 6px 15px rgba(155,89,182,.4)}
+.section-bg-panel .btn-remove{background:#fff;color:#e74c3c;border:2px solid #e74c3c}
+.section-bg-panel .btn-remove:hover{background:#e74c3c;color:#fff}
+.section-bg-indicator{position:absolute;top:75px;left:15px;background:rgba(155,89,182,.9);color:#fff;padding:5px 12px;border-radius:15px;font-size:.85rem;font-weight:600;z-index:40;display:none}
+.page.has-section-bg .section-bg-indicator{display:block}
+
+.contact-block{margin-top:40px}
+.contact-wrapper{display:grid;grid-template-columns:320px 1fr;gap:30px;align-items:stretch;max-width:950px;margin:0 auto}
+.contact-photo-wrapper{position:relative;border-radius:15px;overflow:hidden;box-shadow:0 6px 25px rgba(0,0,0,.12);background:linear-gradient(135deg,#e8eef8,#d4e0f0);display:flex;align-items:center;justify-content:center;min-height:320px;transition:box-shadow .3s}
+.contact-photo-wrapper:hover{box-shadow:0 10px 35px rgba(0,0,0,.18)}
+.contact-photo-wrapper img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
+.contact-photo-placeholder{text-align:center;color:#7a8aa5;padding:30px;z-index:1}
+.contact-photo-placeholder .big-icon{font-size:4rem;display:block;margin-bottom:15px;opacity:.6}
+.contact-photo-placeholder p{font-size:.95rem;font-weight:500;margin-bottom:15px}
+.contact-photo-link{display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:50%;background:#fff;border:2px dashed #2a5298;cursor:pointer;transition:.3s;text-decoration:none;font-size:1.8rem}
+.contact-photo-link:hover{background:#2a5298;border-style:solid;transform:scale(1.1) rotate(8deg);box-shadow:0 6px 20px rgba(42,82,152,.35)}
+.contact-photo-edit-btn{position:absolute;bottom:15px;right:15px;width:48px;height:48px;border-radius:50%;background:#fff;color:#1e3c72;border:2px solid #1e3c72;display:none;align-items:center;justify-content:center;cursor:pointer;font-size:1.3rem;box-shadow:0 4px 15px rgba(0,0,0,.25);transition:.3s;z-index:5}
+.contact-photo-edit-btn:hover{background:#1e3c72;color:#fff;transform:scale(1.1) rotate(15deg)}
+.contact-photo-wrapper.has-image .contact-photo-edit-btn{display:flex}
+.contact-photo-wrapper.has-image .contact-photo-placeholder{display:none}
+.contact-info-box{background:#fff;border-radius:15px;padding:30px 35px;box-shadow:0 4px 20px rgba(0,0,0,.08);display:flex;flex-direction:column;justify-content:center}
+.contact-info-box h3{color:#1e3c72;font-size:1.4rem;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #e8eef8}
+.contact-line{display:flex;align-items:flex-start;gap:8px;padding:12px 0;border-bottom:1px dashed #e0e6f0;font-size:1.1rem}
+.contact-line:last-child{border-bottom:none}
+.contact-key{font-weight:700;color:#1e3c72;min-width:110px;flex-shrink:0;font-size:1.1rem}
+.contact-value-input{flex:1;border:none;outline:none;background:transparent;font-family:'Times New Roman',Times,serif;font-size:1.1rem;color:#333;padding:2px 6px;border-radius:5px;transition:.2s;min-width:0}
+.contact-value-input:hover{background:#f0f5ff}
+.contact-value-input:focus{background:#fff;box-shadow:0 0 0 2px #2a5298}
+.contact-value-input::placeholder{color:#bbb;font-style:italic}
+
+.toast{position:fixed;bottom:30px;right:30px;background:#1e3c72;color:#fff;padding:14px 24px;border-radius:8px;box-shadow:0 5px 20px rgba(0,0,0,.3);transform:translateY(100px);opacity:0;transition:.4s;z-index:999;font-weight:500;max-width:90%;font-size:1.05rem}
+.toast.show{transform:translateY(0);opacity:1}
+.edit-mode-toggle{position:fixed;bottom:30px;left:30px;width:56px;height:56px;border-radius:50%;background:#1e3c72;color:#fff;border:3px solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.5rem;box-shadow:0 5px 20px rgba(0,0,0,.3);z-index:998;transition:.3s}
+.edit-mode-toggle:hover{transform:scale(1.1) rotate(15deg);background:#2a5298}
+.edit-mode-toggle.active{background:#e74c3c}
+body.edit-mode [contenteditable="true"]{outline:2px dashed #ffd700;outline-offset:3px;border-radius:4px;cursor:text;transition:.2s;background:rgba(255,215,0,.05)}
+body.edit-mode [contenteditable="true"]:hover{background:rgba(255,215,0,.15);outline-color:#ff8c00}
+body.edit-mode [contenteditable="true"]:focus{outline:2px solid #ff8c00;background:rgba(255,215,0,.2)}
+.edit-banner{position:fixed;top:0;left:0;right:0;background:#ffd700;color:#1e3c72;text-align:center;padding:8px;font-weight:700;z-index:99;display:none;box-shadow:0 2px 10px rgba(0,0,0,.2);font-size:1.05rem}
+body.edit-mode .edit-banner{display:block}
+body.edit-mode nav{margin-top:38px}
+@media(max-width:900px){.contact-wrapper{grid-template-columns:1fr}.contact-photo-wrapper{min-height:280px}.cv-photo-frame{min-height:400px}}
+@media(max-width:768px){nav{padding:15px}nav ul{flex-wrap:wrap;justify-content:center;gap:10px}.hero{flex-direction:column;text-align:center;padding-top:70px}.hero-text h1{font-size:2.2rem}.vision-mission{grid-template-columns:1fr}.page{padding:30px 15px}.page.has-section-bg .page-inner{padding:30px 15px}.bg-panel{width:240px;right:10px}.edit-mode-toggle{bottom:20px;left:20px;width:48px;height:48px;font-size:1.3rem}.contact-info-box{padding:20px}.contact-line{flex-direction:column;gap:4px}.contact-key{min-width:auto}.cv-lang-btn{padding:10px 20px;font-size:.95rem}.cv-photo-placeholder .big-icon{font-size:3.5rem}.section-bg-toggle{width:42px;height:42px;font-size:1.1rem}.section-bg-panel{width:260px}}
+</style>
+</head>
+<body>
+
+<div class="edit-banner">✏️ CHẾ ĐỘ CHỈNH SỬA — Bấm vào chữ nào để sửa chữ đó (tự động lưu)</div>
+<button class="edit-mode-toggle" id="editModeToggle" title="Bật/tắt chế độ chỉnh sửa">✏️</button>
+
+<nav>
+<ul>
+<li><a href="#" data-page="home" class="active">Trang Chủ</a></li>
+<li class="has-dropdown" id="aboutDropdown">
+<a href="#" data-page="about" id="aboutLink">Giới Thiệu <span class="dropdown-arrow">▼</span></a>
+<ul class="dropdown-menu">
+<li><a href="#" data-page="hobby" id="hobbyLink">🎨 Sở thích</a></li>
+</ul>
+</li>
+<li><a href="#" data-page="timeline">Quá Trình</a></li>
+<li><a href="#" data-page="projects">Dự Án</a></li>
+<li><a href="#" data-page="cv">CV Của Tôi</a></li>
+<li><a href="#" data-page="contact">Liên Hệ</a></li>
+</ul>
+</nav>
+
+<!-- ===== TRANG CHỦ ===== -->
+<section id="home" class="page active">
+<div class="page-inner">
+<button class="section-bg-toggle" data-section="home" title="Chèn ảnh nền cho mục này">🖼️</button>
+<div class="section-bg-indicator">Nền đã đặt</div>
+<div class="section-bg-panel" id="sectionBgPanelHome">
+<h4>Ảnh nền mục Trang Chủ</h4>
+<p>Chọn ảnh nền cho mục này</p>
+<button class="btn-upload" data-section="home">📁 Chèn ảnh nền</button>
+<button class="btn-remove" data-section="home">🗑️ Xóa nền</button>
+</div>
+
+<div class="hero" id="heroSection">
+<button class="change-bg-btn" id="changeBgBtn" title="Đổi nền Hero">🎨</button>
+<div class="bg-panel" id="bgPanel">
+<h4>Chọn màu nền Hero</h4>
+<div class="bg-options" id="bgOptions"></div>
+<div class="upload-bg-section">
+<button class="upload-bg-btn" id="uploadBgBtn">🖼️ Tải ảnh nền Hero</button>
+</div>
+<div class="page-bg-section">
+<h4 style="color:#1e3c72;font-size:.95rem;margin-bottom:8px;text-align:center">Nền toàn trang</h4>
+<button class="page-bg-btn" id="uploadPageBgBtn">🌄 Chèn ảnh nền cả trang</button>
+<button class="reset-bg-btn" id="resetAllBgBtn">↺ Xóa tất cả nền</button>
+</div>
+</div>
+<div class="hero-avatar-wrapper">
+<div class="hero-avatar" id="heroAvatar">K</div>
+<button class="change-avatar-btn" title="Đổi ảnh đại diện">📷</button>
+</div>
+<div class="hero-text">
+<h1 contenteditable="true" data-edit-id="hero-h1">Xin chào, tôi là Nguyễn Văn Kha</h1>
+<p contenteditable="true" data-edit-id="hero-p">Chuyên viên phát triển phần mềm &amp; Đam mê công nghệ</p>
+</div>
+</div>
+
+<div class="intro-block">
+    <div class="intro-photo-wrapper" id="introPhotoWrapper">
+        <img id="introPhoto" src="" alt="" style="display:none;">
+        <div class="intro-photo-placeholder" id="introPhotoPlaceholder">
+            <span class="big-icon">🖼️</span>
+            <p>Chưa có hình</p>
+            <a class="intro-photo-link" id="introPhotoLink" title="Bấm để chèn ảnh từ laptop">📷</a>
+        </div>
+        <button class="intro-photo-edit-btn" id="introPhotoEditBtn" title="Đổi ảnh khác">📷</button>
+    </div>
+    <div class="intro-text">
+        <h2 contenteditable="true" data-edit-id="intro-title">Quan niệm sống</h2>
+        <div class="intro-subtitle" contenteditable="true" data-edit-id="intro-subtitle">Sống có ích, làm việc có tâm, không ngừng vươn lên 🌱</div>
+        <p contenteditable="true" data-edit-id="intro-p1">Tôi tin rằng cuộc sống chỉ thực sự ý nghĩa khi mỗi ngày ta đều cố gắng trở thành phiên bản tốt hơn của chính mình. Với tôi, thành công không phải là đích đến cuối cùng, mà là cả một hành trình không ngừng học hỏi, trải nghiệm và hoàn thiện bản thân.</p>
+        <p contenteditable="true" data-edit-id="intro-p2">Trong công việc cũng như cuộc sống, tôi luôn tâm niệm phải sống có trách nhiệm, làm việc bằng cả cái tâm và đối xử với mọi người bằng sự chân thành. Tôi yêu thích sự đơn giản, trân trọng những điều nhỏ bé và luôn biết ơn những gì mình đang có.</p>
+        <div class="intro-tags" contenteditable="true" data-edit-id="intro-tags">
+            <span class="intro-tag">💻 Tận tâm với nghề</span>
+            <span class="intro-tag">📚 Học hỏi mỗi ngày</span>
+            <span class="intro-tag">🌱 Sống tích cực</span>
+            <span class="intro-tag">🤝 Chân thành</span>
+        </div>
+    </div>
+</div>
+
+<div class="vision-mission">
+<div class="card">
+<h3 contenteditable="true" data-edit-id="vision-title">🎯 Tầm Nhìn</h3>
+<p contenteditable="true" data-edit-id="vision-text">Trở thành một chuyên gia công nghệ hàng đầu, tạo ra những sản phẩm số có giá trị thực tiễn cao, góp phần nâng cao chất lượng cuộc sống và thúc đẩy chuyển đổi số tại Việt Nam. Tôi hướng tới việc xây dựng các giải pháp công nghệ bền vững, thân thiện và dễ tiếp cận cho mọi người.</p>
+</div>
+<div class="card">
+<h3 contenteditable="true" data-edit-id="mission-title">🚀 Sứ Mệnh</h3>
+<p contenteditable="true" data-edit-id="mission-text">Không ngừng học hỏi, sáng tạo và áp dụng công nghệ để giải quyết các vấn đề thực tế. Mang đến những sản phẩm chất lượng, tối ưu trải nghiệm người dùng, đồng thời chia sẻ kiến thức và truyền cảm hứng cho cộng đồng lập trình viên trẻ. Tôi tin rằng công nghệ chỉ thực sự có ý nghĩa khi phục vụ con người.</p>
+</div>
+</div>
+
+<div class="contact-block">
+<h2 class="section-title" contenteditable="true" data-edit-id="contact-section-title">THÔNG TIN LIÊN HỆ</h2>
+<div class="contact-wrapper">
+<div class="contact-photo-wrapper" id="contactPhotoWrapper">
+<img id="contactPhoto" src="" alt="" style="display:none;">
+<div class="contact-photo-placeholder" id="contactPhotoPlaceholder">
+<span class="big-icon">🖼️</span>
+<p>Chưa có hình</p>
+<a class="contact-photo-link" id="contactPhotoLink" title="Bấm để chèn ảnh từ laptop">📷</a>
+</div>
+<button class="contact-photo-edit-btn" id="contactPhotoEditBtn" title="Đổi ảnh khác">📷</button>
+</div>
+<div class="contact-info-box">
+<h3 contenteditable="true" data-edit-id="contact-info-title">Thông tin của tôi</h3>
+<div class="contact-line">
+<span class="contact-key">SDT :</span>
+<input type="tel" class="contact-value-input" id="contactPhone" placeholder="Nhập số điện thoại..." data-edit-id="contact-phone">
+</div>
+<div class="contact-line">
+<span class="contact-key">Địa chỉ:</span>
+<input type="text" class="contact-value-input" id="contactAddress" placeholder="Nhập địa chỉ..." data-edit-id="contact-address">
+</div>
+<div class="contact-line">
+<span class="contact-key">Email:</span>
+<input type="email" class="contact-value-input" id="contactEmail" placeholder="Nhập email..." data-edit-id="contact-email">
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== GIỚI THIỆU ===== -->
+<section id="about" class="page">
+<div class="page-inner">
+<button class="section-bg-toggle" data-section="about" title="Chèn ảnh nền cho mục này">🖼️</button>
+<div class="section-bg-indicator">Nền đã đặt</div>
+<div class="section-bg-panel" id="sectionBgPanelAbout">
+<h4>Ảnh nền mục Giới Thiệu</h4>
+<p>Chọn ảnh nền cho mục này</p>
+<button class="btn-upload" data-section="about">📁 Chèn ảnh nền</button>
+<button class="btn-remove" data-section="about">🗑️ Xóa nền</button>
+</div>
+
+<h2 class="section-title" contenteditable="true" data-edit-id="about-section-title">Giới Thiệu Về Tôi</h2>
+
+<div class="intro-block">
+    <div class="intro-photo-wrapper" id="aboutIntroPhotoWrapper">
+        <img id="aboutIntroPhoto" src="" alt="" style="display:none;">
+        <div class="intro-photo-placeholder" id="aboutIntroPhotoPlaceholder">
+            <span class="big-icon">🖼️</span>
+            <p>Chưa có hình</p>
+            <a class="intro-photo-link" id="aboutIntroPhotoLink" title="Bấm để chèn ảnh từ laptop">📷</a>
+        </div>
+        <button class="intro-photo-edit-btn" id="aboutIntroPhotoEditBtn" title="Đổi ảnh khác">📷</button>
+    </div>
+    <div class="intro-text">
+        <h2 contenteditable="true" data-edit-id="about-intro-title">Giới thiệu bản thân</h2>
+        <div class="intro-subtitle" contenteditable="true" data-edit-id="about-intro-subtitle">Rất vui được gặp bạn! 👋</div>
+        <p contenteditable="true" data-edit-id="about-intro-p1">Tôi là Nguyễn Văn Kha, một lập trình viên đầy nhiệt huyết với niềm đam mê mãnh liệt dành cho công nghệ và phát triển phần mềm. Tôi yêu thích việc biến những ý tưởng thành sản phẩm thực tế, tối ưu hóa quy trình và mang lại giá trị cho người dùng.</p>
+        <p contenteditable="true" data-edit-id="about-intro-p2">Với tinh thần ham học hỏi, tôi luôn tìm tòi những công nghệ mới, rèn luyện kỹ năng lập trình và tư duy giải quyết vấn đề. Ngoài công việc, tôi thích đọc sách, tham gia cộng đồng lập trình và chia sẻ kiến thức.</p>
+        <div class="intro-tags" contenteditable="true" data-edit-id="about-intro-tags">
+            <span class="intro-tag">💻 Full-stack Developer</span>
+            <span class="intro-tag">📚 Ham học hỏi</span>
+            <span class="intro-tag">🚀 Sáng tạo</span>
+            <span class="intro-tag">🎯 Tận tâm</span>
+        </div>
+    </div>
+</div>
+
+<div class="goals-block">
+    <div class="goal-card career">
+        <div class="goal-header">
+            <div class="goal-icon">💼</div>
+            <h3 class="goal-title" contenteditable="true" data-edit-id="career-title">Mục tiêu nghề nghiệp</h3>
+        </div>
+        <div class="goal-subtitle" contenteditable="true" data-edit-id="career-subtitle">Định hướng phát triển sự nghiệp trong ngành công nghệ</div>
+        <p contenteditable="true" data-edit-id="career-p1">Trở thành một Full-stack Developer chuyên nghiệp, có khả năng thiết kế và xây dựng các hệ thống phần mềm hoàn chỉnh, từ giao diện người dùng đến backend và cơ sở dữ liệu.</p>
+        <p contenteditable="true" data-edit-id="career-p2">Không ngừng nâng cao kỹ năng chuyên môn, học hỏi các công nghệ mới như AI, Cloud Computing và DevOps. Hướng tới vị trí Tech Lead hoặc Solution Architect trong 3-5 năm tới.</p>
+        <p contenteditable="true" data-edit-id="career-p3">Đóng góp vào sự phát triển của công ty và cộng đồng công nghệ Việt Nam, tạo ra những sản phẩm có giá trị thực tiễn cao và được người dùng tin dùng.</p>
+    </div>
+    <div class="goal-card life">
+        <div class="goal-header">
+            <div class="goal-icon">🌟</div>
+            <h3 class="goal-title" contenteditable="true" data-edit-id="life-title">Mục tiêu cuộc đời</h3>
+        </div>
+        <div class="goal-subtitle" contenteditable="true" data-edit-id="life-subtitle">Sống ý nghĩa, hạnh phúc và có ích cho xã hội</div>
+        <p contenteditable="true" data-edit-id="life-p1">Xây dựng một cuộc sống cân bằng giữa công việc, gia đình và sức khỏe. Luôn giữ tinh thần lạc quan, sống có trách nhiệm với bản thân và mọi người xung quanh.</p>
+        <p contenteditable="true" data-edit-id="life-p2">Trở thành người truyền cảm hứng cho thế hệ trẻ, chia sẻ kiến thức và kinh nghiệm để giúp đỡ cộng đồng. Tích cực tham gia các hoạt động thiện nguyện, đóng góp cho xã hội.</p>
+        <p contenteditable="true" data-edit-id="life-p3">Không ngừng học hỏi, trải nghiệm và hoàn thiện bản thân mỗi ngày. Sống trọn vẹn từng khoảnh khắc, biết ơn những gì mình đang có và luôn hướng tới những điều tốt đẹp hơn.</p>
+    </div>
+</div>
+
+<div class="contact-block">
+<h2 class="section-title" contenteditable="true" data-edit-id="about-contact-section-title">THÔNG TIN LIÊN HỆ</h2>
+<div class="contact-wrapper">
+<div class="contact-photo-wrapper" id="aboutContactPhotoWrapper">
+<img id="aboutContactPhoto" src="" alt="" style="display:none;">
+<div class="contact-photo-placeholder" id="aboutContactPhotoPlaceholder">
+<span class="big-icon">🖼️</span>
+<p>Chưa có hình</p>
+<a class="contact-photo-link" id="aboutContactPhotoLink" title="Bấm để chèn ảnh từ laptop">📷</a>
+</div>
+<button class="contact-photo-edit-btn" id="aboutContactPhotoEditBtn" title="Đổi ảnh khác">📷</button>
+</div>
+<div class="contact-info-box">
+<h3 contenteditable="true" data-edit-id="about-contact-info-title">Thông tin của tôi</h3>
+<div class="contact-line">
+<span class="contact-key">SDT :</span>
+<input type="tel" class="contact-value-input" id="aboutContactPhone" placeholder="Nhập số điện thoại..." data-edit-id="about-contact-phone">
+</div>
+<div class="contact-line">
+<span class="contact-key">Địa chỉ:</span>
+<input type="text" class="contact-value-input" id="aboutContactAddress" placeholder="Nhập địa chỉ..." data-edit-id="about-contact-address">
+</div>
+<div class="contact-line">
+<span class="contact-key">Email:</span>
+<input type="email" class="contact-value-input" id="aboutContactEmail" placeholder="Nhập email..." data-edit-id="about-contact-email">
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== SỞ THÍCH ===== -->
+<section id="hobby" class="page">
+<div class="page-inner">
+<button class="section-bg-toggle" data-section="hobby" title="Chèn ảnh nền cho mục này">🖼️</button>
+<div class="section-bg-indicator">Nền đã đặt</div>
+<div class="section-bg-panel" id="sectionBgPanelHobby">
+<h4>Ảnh nền mục Sở Thích</h4>
+<p>Chọn ảnh nền cho mục này</p>
+<button class="btn-upload" data-section="hobby">📁 Chèn ảnh nền</button>
+<button class="btn-remove" data-section="hobby">🗑️ Xóa nền</button>
+</div>
+
+<h2 class="section-title" contenteditable="true" data-edit-id="hobby-section-title">Sở Thích Của Tôi</h2>
+<p style="text-align:center;color:#666;font-size:1.1rem;font-style:italic;margin-bottom:25px;max-width:700px;margin-left:auto;margin-right:auto" contenteditable="true" data-edit-id="hobby-intro">Những điều tôi yêu thích và dành thời gian cho nó ngoài giờ làm việc</p>
+
+<div class="hobby-page-grid" contenteditable="true" data-edit-id="hobby-page-grid">
+    <div class="hobby-page-item">
+        <div class="hobby-page-icon">💻</div>
+        <div class="hobby-page-name">Lập trình</div>
+        <div class="hobby-page-desc">Đam mê viết code, khám phá công nghệ mới và xây dựng sản phẩm hữu ích</div>
+    </div>
+    <div class="hobby-page-item">
+        <div class="hobby-page-icon">📚</div>
+        <div class="hobby-page-name">Đọc sách</div>
+        <div class="hobby-page-desc">Yêu thích sách công nghệ, kỹ năng sống và phát triển bản thân</div>
+    </div>
+    <div class="hobby-page-item">
+        <div class="hobby-page-icon">🎵</div>
+        <div class="hobby-page-name">Nghe nhạc</div>
+        <div class="hobby-page-desc">Âm nhạc giúp tôi thư giãn, giảm căng thẳng và tăng khả năng sáng tạo</div>
+    </div>
+    <div class="hobby-page-item">
+        <div class="hobby-page-icon">✈️</div>
+        <div class="hobby-page-name">Du lịch</div>
+        <div class="hobby-page-desc">Khám phá vùng đất mới, trải nghiệm văn hóa và ẩm thực các vùng miền</div>
+    </div>
+    <div class="hobby-page-item">
+        <div class="hobby-page-icon">☕</div>
+        <div class="hobby-page-name">Cà phê</div>
+        <div class="hobby-page-desc">Thưởng thức cà phê và trò chuyện cùng bạn bè vào cuối tuần</div>
+    </div>
+    <div class="hobby-page-item">
+        <div class="hobby-page-icon">🎮</div>
+        <div class="hobby-page-name">Chơi game</div>
+        <div class="hobby-page-desc">Giải trí sau giờ làm việc, rèn luyện tư duy chiến thuật và phản xạ</div>
+    </div>
+    <div class="hobby-page-item">
+        <div class="hobby-page-icon">🏃</div>
+        <div class="hobby-page-name">Thể thao</div>
+        <div class="hobby-page-desc">Chạy bộ và tập thể dục để giữ sức khỏe và tinh thần minh mẫn</div>
+    </div>
+    <div class="hobby-page-item">
+        <div class="hobby-page-icon">📷</div>
+        <div class="hobby-page-name">Nhiếp ảnh</div>
+        <div class="hobby-page-desc">Ghi lại những khoảnh khắc đẹp trong cuộc sống và thiên nhiên</div>
+    </div>
+</div>
+</div>
+</section>
+
+<!-- ===== QUÁ TRÌNH ===== -->
+<section id="timeline" class="page">
+<div class="page-inner">
+<button class="section-bg-toggle" data-section="timeline" title="Chèn ảnh nền cho mục này">🖼️</button>
+<div class="section-bg-indicator">Nền đã đặt</div>
+<div class="section-bg-panel" id="sectionBgPanelTimeline">
+<h4>Ảnh nền mục Quá Trình</h4>
+<p>Chọn ảnh nền cho mục này</p>
+<button class="btn-upload" data-section="timeline">📁 Chèn ảnh nền</button>
+<button class="btn-remove" data-section="timeline">🗑️ Xóa nền</button>
+</div>
+
+<h2 class="section-title" contenteditable="true" data-edit-id="timeline-section-title">Quá Trình Làm Việc &amp; Học Tập</h2>
+<p style="text-align:center;color:#666;font-size:1.1rem;font-style:italic;margin-bottom:25px;max-width:700px;margin-left:auto;margin-right:auto" contenteditable="true" data-edit-id="timeline-intro">Hành trình học tập và phát triển sự nghiệp của tôi</p>
+
+<div class="process-grid">
+    <div class="process-card">
+        <div class="process-photo-wrapper" id="procPhoto1Wrapper">
+            <img id="procPhoto1" src="" alt="" style="display:none;">
+            <div class="process-photo-placeholder" id="procPhoto1Placeholder">
+                <span class="big-icon">🖼️</span>
+                <p>Chưa có hình</p>
+                <a class="process-photo-link" id="procPhoto1Link" title="Chèn ảnh từ laptop">📷</a>
+            </div>
+            <button class="process-photo-edit-btn" id="procPhoto1EditBtn" title="Đổi ảnh khác">📷</button>
+        </div>
+        <div class="process-content">
+            <h3 contenteditable="true" data-edit-id="tl1-title">Kỹ sư Công nghệ Thông tin</h3>
+            <div class="process-time" contenteditable="true" data-edit-id="tl1-time">2018 - 2022</div>
+            <div contenteditable="true" data-edit-id="tl1-text">
+                <p>Tốt nghiệp Đại học chuyên ngành Công nghệ Thông tin, đạt thành tích học tập xuất sắc.</p>
+                <p>Tham gia nhiều dự án nghiên cứu và cuộc thi lập trình sinh viên.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="process-card">
+        <div class="process-photo-wrapper" id="procPhoto2Wrapper">
+            <img id="procPhoto2" src="" alt="" style="display:none;">
+            <div class="process-photo-placeholder" id="procPhoto2Placeholder">
+                <span class="big-icon">🖼️</span>
+                <p>Chưa có hình</p>
+                <a class="process-photo-link" id="procPhoto2Link" title="Chèn ảnh từ laptop">📷</a>
+            </div>
+            <button class="process-photo-edit-btn" id="procPhoto2EditBtn" title="Đổi ảnh khác">📷</button>
+        </div>
+        <div class="process-content">
+            <h3 contenteditable="true" data-edit-id="tl2-title">Thực tập sinh Phát triển Web</h3>
+            <div class="process-time" contenteditable="true" data-edit-id="tl2-time">2021 - 2022</div>
+            <div contenteditable="true" data-edit-id="tl2-text">
+                <p>Làm việc tại công ty công nghệ, tham gia phát triển giao diện người dùng và backend cho các dự án thương mại điện tử.</p>
+                <p>Học hỏi quy trình làm việc chuyên nghiệp theo mô hình Agile/Scrum.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="process-card">
+        <div class="process-photo-wrapper" id="procPhoto3Wrapper">
+            <img id="procPhoto3" src="" alt="" style="display:none;">
+            <div class="process-photo-placeholder" id="procPhoto3Placeholder">
+                <span class="big-icon">🖼️</span>
+                <p>Chưa có hình</p>
+                <a class="process-photo-link" id="procPhoto3Link" title="Chèn ảnh từ laptop">📷</a>
+            </div>
+            <button class="process-photo-edit-btn" id="procPhoto3EditBtn" title="Đổi ảnh khác">📷</button>
+        </div>
+        <div class="process-content">
+            <h3 contenteditable="true" data-edit-id="tl3-title">Junior Full-stack Developer</h3>
+            <div class="process-time" contenteditable="true" data-edit-id="tl3-time">2022 - 2024</div>
+            <div contenteditable="true" data-edit-id="tl3-text">
+                <p>Phát triển và bảo trì các ứng dụng web sử dụng ReactJS, Node.js, MySQL.</p>
+                <p>Tham gia tối ưu hiệu năng hệ thống, xây dựng API và làm việc trực tiếp với khách hàng để hiểu rõ yêu cầu nghiệp vụ.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="process-card">
+        <div class="process-photo-wrapper" id="procPhoto4Wrapper">
+            <img id="procPhoto4" src="" alt="" style="display:none;">
+            <div class="process-photo-placeholder" id="procPhoto4Placeholder">
+                <span class="big-icon">🖼️</span>
+                <p>Chưa có hình</p>
+                <a class="process-photo-link" id="procPhoto4Link" title="Chèn ảnh từ laptop">📷</a>
+            </div>
+            <button class="process-photo-edit-btn" id="procPhoto4EditBtn" title="Đổi ảnh khác">📷</button>
+        </div>
+        <div class="process-content">
+            <h3 contenteditable="true" data-edit-id="tl4-title">Full-stack Developer</h3>
+            <div class="process-time" contenteditable="true" data-edit-id="tl4-time">2024 - Hiện tại</div>
+            <div contenteditable="true" data-edit-id="tl4-text">
+                <p>Đảm nhận vai trò phát triển chính các dự án quan trọng, dẫn dắt nhóm nhỏ, thiết kế kiến trúc hệ thống.</p>
+                <p>Triển khai các giải pháp công nghệ hiện đại (Docker, AWS, CI/CD).</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<!-- ===== DỰ ÁN ===== -->
+<section id="projects" class="page">
+<div class="page-inner">
+<button class="section-bg-toggle" data-section="projects" title="Chèn ảnh nền cho mục này">🖼️</button>
+<div class="section-bg-indicator">Nền đã đặt</div>
+<div class="section-bg-panel" id="sectionBgPanelProjects">
+<h4>Ảnh nền mục Dự Án</h4>
+<p>Chọn ảnh nền cho mục này</p>
+<button class="btn-upload" data-section="projects">📁 Chèn ảnh nền</button>
+<button class="btn-remove" data-section="projects">🗑️ Xóa nền</button>
+</div>
+
+<h2 class="section-title" contenteditable="true" data-edit-id="projects-section-title">Các Dự Án Đã Tham Gia</h2>
+<p style="text-align:center;color:#666;font-size:1.1rem;font-style:italic;margin-bottom:25px;max-width:700px;margin-left:auto;margin-right:auto" contenteditable="true" data-edit-id="projects-intro">Một số dự án tiêu biểu tôi đã tham gia và đóng góp</p>
+
+<div class="projects-grid">
+    <div class="project-card">
+        <div class="project-photo-wrapper" id="projPhoto1Wrapper">
+            <img id="projPhoto1" src="" alt="" style="display:none;">
+            <div class="project-photo-placeholder" id="projPhoto1Placeholder">
+                <span class="big-icon">🖼️</span>
+                <p>Chưa có hình</p>
+                <a class="project-photo-link" id="projPhoto1Link" title="Chèn ảnh từ laptop">📷</a>
+            </div>
+            <button class="project-photo-edit-btn" id="projPhoto1EditBtn" title="Đổi ảnh khác">📷</button>
+        </div>
+        <div class="project-content">
+            <h3 class="project-title" contenteditable="true" data-edit-id="proj1-title">Hệ thống Thương mại Điện tử</h3>
+            <div class="project-role" contenteditable="true" data-edit-id="proj1-role">Full-stack Developer</div>
+            <div class="project-desc" contenteditable="true" data-edit-id="proj1-desc">
+                <p>Xây dựng nền tảng mua sắm trực tuyến với đầy đủ chức năng giỏ hàng, thanh toán, quản lý đơn hàng và dashboard quản trị.</p>
+                <p>Sử dụng ReactJS cho frontend, Node.js cho backend và MongoDB để lưu trữ dữ liệu. Tích hợp cổng thanh toán trực tuyến và hệ thống thông báo realtime.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="project-photo-wrapper" id="projPhoto2Wrapper">
+            <img id="projPhoto2" src="" alt="" style="display:none;">
+            <div class="project-photo-placeholder" id="projPhoto2Placeholder">
+                <span class="big-icon">🖼️</span>
+                <p>Chưa có hình</p>
+                <a class="project-photo-link" id="projPhoto2Link" title="Chèn ảnh từ laptop">📷</a>
+            </div>
+            <button class="project-photo-edit-btn" id="projPhoto2EditBtn" title="Đổi ảnh khác">📷</button>
+        </div>
+        <div class="project-content">
+            <h3 class="project-title" contenteditable="true" data-edit-id="proj2-title">Ứng dụng Quản lý Công việc</h3>
+            <div class="project-role" contenteditable="true" data-edit-id="proj2-role">Frontend Developer</div>
+            <div class="project-desc" contenteditable="true" data-edit-id="proj2-desc">
+                <p>Ứng dụng quản lý công việc nhóm với tính năng kéo-thả, thông báo realtime, phân quyền người dùng và báo cáo thống kê.</p>
+                <p>Sử dụng Vue.js và Firebase, tối ưu trải nghiệm người dùng với giao diện thân thiện, dễ sử dụng trên cả desktop và mobile.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="project-card">
+        <div class="project-photo-wrapper" id="projPhoto3Wrapper">
+            <img id="projPhoto3" src="" alt="" style="display:none;">
+            <div class="project-photo-placeholder" id="projPhoto3Placeholder">
+                <span class="big-icon">🖼️</span>
+                <p>Chưa có hình</p>
+                <a class="project-photo-link" id="projPhoto3Link" title="Chèn ảnh từ laptop">📷</a>
+            </div>
+            <button class="project-photo-edit-btn" id="projPhoto3EditBtn" title="Đổi ảnh khác">📷</button>
+        </div>
+        <div class="project-content">
+            <h3 class="project-title" contenteditable="true" data-edit-id="proj3-title">Website Đặt lịch Khám Bệnh</h3>
+            <div class="project-role" contenteditable="true" data-edit-id="proj3-role">Backend Developer</div>
+            <div class="project-desc" contenteditable="true" data-edit-id="proj3-desc">
+                <p>Hệ thống đặt lịch khám bệnh trực tuyến cho phòng khám, hỗ trợ quản lý bác sĩ, lịch hẹn và thanh toán trực tuyến.</p>
+                <p>Xây dựng REST API với Java Spring, cơ sở dữ liệu MySQL, tích hợp gửi thông báo qua SMS và email nhắc lịch hẹn cho bệnh nhân.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<!-- ===== CV ===== -->
+<section id="cv" class="page">
+<div class="page-inner">
+<button class="section-bg-toggle" data-section="cv" title="Chèn ảnh nền cho mục này">🖼️</button>
+<div class="section-bg-indicator">Nền đã đặt</div>
+<div class="section-bg-panel" id="sectionBgPanelCv">
+<h4>Ảnh nền mục CV</h4>
+<p>Chọn ảnh nền cho mục này</p>
+<button class="btn-upload" data-section="cv">📁 Chèn ảnh nền</button>
+<button class="btn-remove" data-section="cv">🗑️ Xóa nền</button>
+</div>
+
+<h2 class="section-title" contenteditable="true" data-edit-id="cv-section-title">CV Của Tôi</h2>
+
+<div class="cv-lang-tabs">
+    <button class="cv-lang-btn active" data-lang="vi" id="cvTabVi">
+        <span class="flag">🇻🇳</span> Tiếng Việt
+    </button>
+    <button class="cv-lang-btn" data-lang="en" id="cvTabEn">
+        <span class="flag">🇬🇧</span> English
+    </button>
+    <button class="cv-lang-btn" data-lang="zh" id="cvTabZh">
+        <span class="flag">🇨🇳</span> 中文
+    </button>
+</div>
+
+<div class="cv-lang-content active" id="cvContentVi">
+    <div class="cv-photo-box">
+        <div class="cv-photo-frame" id="cvFrameVi">
+            <img id="cvImageVi" src="" alt="" style="display:none;">
+            <div class="cv-photo-placeholder" id="cvPlaceholderVi">
+                <span class="big-icon">📄</span>
+                <h3>CV Tiếng Việt</h3>
+                <p>Tải ảnh CV tiếng Việt của bạn lên</p>
+                <button class="cv-upload-btn" id="cvUploadBtnVi">📁 Tải ảnh CV lên</button>
+            </div>
+        </div>
+        <div class="cv-photo-actions" id="cvActionsVi" style="display:none">
+            <button class="cv-action-btn" id="cvChangeBtnVi">🔄 Đổi ảnh khác</button>
+            <button class="cv-action-btn danger" id="cvDeleteBtnVi">🗑️ Xóa ảnh</button>
+        </div>
+    </div>
+</div>
+
+<div class="cv-lang-content" id="cvContentEn">
+    <div class="cv-photo-box">
+        <div class="cv-photo-frame" id="cvFrameEn">
+            <img id="cvImageEn" src="" alt="" style="display:none;">
+            <div class="cv-photo-placeholder" id="cvPlaceholderEn">
+                <span class="big-icon">📄</span>
+                <h3>English CV</h3>
+                <p>Upload your English CV image</p>
+                <button class="cv-upload-btn" id="cvUploadBtnEn">📁 Upload CV image</button>
+            </div>
+        </div>
+        <div class="cv-photo-actions" id="cvActionsEn" style="display:none">
+            <button class="cv-action-btn" id="cvChangeBtnEn">🔄 Change image</button>
+            <button class="cv-action-btn danger" id="cvDeleteBtnEn">🗑️ Delete image</button>
+        </div>
+    </div>
+</div>
+
+<div class="cv-lang-content" id="cvContentZh">
+    <div class="cv-photo-box">
+        <div class="cv-photo-frame" id="cvFrameZh">
+            <img id="cvImageZh" src="" alt="" style="display:none;">
+            <div class="cv-photo-placeholder" id="cvPlaceholderZh">
+                <span class="big-icon">📄</span>
+                <h3>中文简历</h3>
+                <p>上传您的中文简历图片</p>
+                <button class="cv-upload-btn" id="cvUploadBtnZh">📁 上传简历图片</button>
+            </div>
+        </div>
+        <div class="cv-photo-actions" id="cvActionsZh" style="display:none">
+            <button class="cv-action-btn" id="cvChangeBtnZh">🔄 更换图片</button>
+            <button class="cv-action-btn danger" id="cvDeleteBtnZh">🗑️ 删除图片</button>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+<!-- ===== LIÊN HỆ ===== -->
+<section id="contact" class="page">
+<div class="page-inner">
+<button class="section-bg-toggle" data-section="contact" title="Chèn ảnh nền cho mục này">🖼️</button>
+<div class="section-bg-indicator">Nền đã đặt</div>
+<div class="section-bg-panel" id="sectionBgPanelContact">
+<h4>Ảnh nền mục Liên Hệ</h4>
+<p>Chọn ảnh nền cho mục này</p>
+<button class="btn-upload" data-section="contact">📁 Chèn ảnh nền</button>
+<button class="btn-remove" data-section="contact">🗑️ Xóa nền</button>
+</div>
+
+<h2 class="section-title" contenteditable="true" data-edit-id="contact-page-title">Liên Hệ Với Tôi</h2>
+<p style="text-align:center;color:#666;font-size:1.1rem;font-style:italic;margin-bottom:25px;max-width:700px;margin-left:auto;margin-right:auto" contenteditable="true" data-edit-id="contact-page-intro">Hãy kết nối với tôi qua các kênh dưới đây. Tôi luôn sẵn sàng lắng nghe và hợp tác!</p>
+
+<div class="contact-block" style="margin-top:0">
+<div class="contact-wrapper">
+<div class="contact-photo-wrapper" id="contactPagePhotoWrapper">
+<img id="contactPagePhoto" src="" alt="" style="display:none;">
+<div class="contact-photo-placeholder" id="contactPagePhotoPlaceholder">
+<span class="big-icon">🖼️</span>
+<p>Chưa có hình</p>
+<a class="contact-photo-link" id="contactPagePhotoLink" title="Bấm để chèn ảnh từ laptop">📷</a>
+</div>
+<button class="contact-photo-edit-btn" id="contactPagePhotoEditBtn" title="Đổi ảnh khác">📷</button>
+</div>
+<div class="contact-info-box">
+<h3 contenteditable="true" data-edit-id="contact-page-info-title">Thông tin của tôi</h3>
+<div class="contact-line">
+<span class="contact-key">SDT :</span>
+<input type="tel" class="contact-value-input" id="contactPagePhone" placeholder="Nhập số điện thoại..." data-edit-id="contact-page-phone">
+</div>
+<div class="contact-line">
+<span class="contact-key">Địa chỉ:</span>
+<input type="text" class="contact-value-input" id="contactPageAddress" placeholder="Nhập địa chỉ..." data-edit-id="contact-page-address">
+</div>
+<div class="contact-line">
+<span class="contact-key">Email:</span>
+<input type="email" class="contact-value-input" id="contactPageEmail" placeholder="Nhập email..." data-edit-id="contact-page-email">
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="toast" id="toast">Đã cập nhật!</div>
+
+<input type="file" id="avatarInput" accept="image/*" style="display:none;">
+<input type="file" id="bgImageInput" accept="image/*" style="display:none;">
+<input type="file" id="contactPhotoInput" accept="image/*" style="display:none;">
+<input type="file" id="introPhotoInput" accept="image/*" style="display:none;">
+<input type="file" id="aboutIntroPhotoInput" accept="image/*" style="display:none;">
+<input type="file" id="aboutContactPhotoInput" accept="image/*" style="display:none;">
+<input type="file" id="procPhoto1Input" accept="image/*" style="display:none;">
+<input type="file" id="procPhoto2Input" accept="image/*" style="display:none;">
+<input type="file" id="procPhoto3Input" accept="image/*" style="display:none;">
+<input type="file" id="procPhoto4Input" accept="image/*" style="display:none;">
+<input type="file" id="projPhoto1Input" accept="image/*" style="display:none;">
+<input type="file" id="projPhoto2Input" accept="image/*" style="display:none;">
+<input type="file" id="projPhoto3Input" accept="image/*" style="display:none;">
+<input type="file" id="contactPagePhotoInput" accept="image/*" style="display:none;">
+<input type="file" id="pageBgInput" accept="image/*" style="display:none;">
+<input type="file" id="cvInputVi" accept="image/*" style="display:none;">
+<input type="file" id="cvInputEn" accept="image/*" style="display:none;">
+<input type="file" id="cvInputZh" accept="image/*" style="display:none;">
+<input type="file" id="sectionBgInput" accept="image/*" style="display:none;">
+
+<script>
+(function(){
+'use strict';
+
+var links=document.querySelectorAll('nav ul li a[data-page]');
+var pages=document.querySelectorAll('.page');
+var aboutDropdown=document.getElementById('aboutDropdown');
+var aboutLink=document.getElementById('aboutLink');
+
+aboutLink.addEventListener('click',function(e){
+e.preventDefault();
+e.stopPropagation();
+if(aboutDropdown.classList.contains('open')){
+aboutDropdown.classList.remove('open');
+return;
+}
+aboutDropdown.classList.add('open');
+var target=this.getAttribute('data-page');
+pages.forEach(function(p){p.classList.remove('active');});
+document.getElementById(target).classList.add('active');
+links.forEach(function(l){l.classList.remove('active');});
+this.classList.add('active');
+window.scrollTo({top:0,behavior:'smooth'});
+});
+
+document.addEventListener('click',function(e){
+if(!aboutDropdown.contains(e.target)){
+aboutDropdown.classList.remove('open');
+}
+});
+
+links.forEach(function(link){
+if(link===aboutLink)return;
+link.addEventListener('click',function(e){
+e.preventDefault();
+var target=this.getAttribute('data-page');
+pages.forEach(function(p){p.classList.remove('active');});
+document.getElementById(target).classList.add('active');
+links.forEach(function(l){l.classList.remove('active');});
+this.classList.add('active');
+aboutDropdown.classList.remove('open');
+window.scrollTo({top:0,behavior:'smooth'});
+});
+});
+
+/* ===== ẢNH NỀN CHO TỪNG SECTION ===== */
+var sectionBgInput=document.getElementById('sectionBgInput');
+var currentSectionForBg=null;
+
+// Toggle panel khi bấm nút 🖼️
+document.querySelectorAll('.section-bg-toggle').forEach(function(btn){
+btn.addEventListener('click',function(e){
+e.stopPropagation();
+var section=this.dataset.section;
+var panel=document.getElementById('sectionBgPanel'+section.charAt(0).toUpperCase()+section.slice(1));
+// Đóng các panel khác
+document.querySelectorAll('.section-bg-panel').forEach(function(p){p.classList.remove('show');});
+if(panel)panel.classList.toggle('show');
+});
+});
+
+// Đóng panel khi click ra ngoài
+document.addEventListener('click',function(e){
+if(!e.target.closest('.section-bg-panel')&&!e.target.closest('.section-bg-toggle')){
+document.querySelectorAll('.section-bg-panel').forEach(function(p){p.classList.remove('show');});
+}
+});
+
+// Bấm nút "Chèn ảnh nền"
+document.querySelectorAll('.btn-upload').forEach(function(btn){
+btn.addEventListener('click',function(e){
+e.stopPropagation();
+currentSectionForBg=this.dataset.section;
+sectionBgInput.click();
+});
+});
+
+// Bấm nút "Xóa nền"
+document.querySelectorAll('.btn-remove').forEach(function(btn){
+btn.addEventListener('click',function(e){
+e.stopPropagation();
+var section=this.dataset.section;
+if(!confirm('Bạn có chắc muốn xóa ảnh nền mục này?'))return;
+removeSectionBg(section);
+showToast('🗑️ Đã xóa ảnh nền mục!');
+});
+});
+
+// Xử lý khi chọn file
+sectionBgInput.addEventListener('change',function(){
+var file=this.files[0];
+if(!file||!currentSectionForBg)return;
+if(!file.type.startsWith('image/')){showToast('⚠️ Vui lòng chọn file ảnh!');return;}
+if(file.size>10*1024*1024){showToast('⚠️ Ảnh quá lớn! Vui lòng chọn ảnh dưới 10MB.');return;}
+var reader=new FileReader();
+reader.onload=function(e){
+var dataUrl=e.target.result;
+applySectionBg(currentSectionForBg,dataUrl);
+try{
+localStorage.setItem('nguyenvankha_section_bg_'+currentSectionForBg,dataUrl);
+showToast('✅ Đã chèn ảnh nền cho mục!');
+}catch(err){
+showToast('⚠️ Ảnh quá lớn để lưu, nhưng vẫn hiển thị tạm thời.');
+}
+// Đóng panel
+document.querySelectorAll('.section-bg-panel').forEach(function(p){p.classList.remove('show');});
+};
+reader.readAsDataURL(file);
+this.value='';
+currentSectionForBg=null;
+});
+
+function applySectionBg(section,dataUrl){
+var page=document.getElementById(section);
+if(!page)return;
+var inner=page.querySelector('.page-inner');
+if(!inner)return;
+inner.style.backgroundImage='url('+dataUrl+')';
+page.classList.add('has-section-bg');
+}
+
+function removeSectionBg(section){
+var page=document.getElementById(section);
+if(!page)return;
+var inner=page.querySelector('.page-inner');
+if(!inner)return;
+inner.style.backgroundImage='';
+page.classList.remove('has-section-bg');
+try{localStorage.removeItem('nguyenvankha_section_bg_'+section);}catch(e){}
+}
+
+/* ===== CV ĐA NGÔN NGỮ - TẢI ẢNH ===== */
+var cvTabs=document.querySelectorAll('.cv-lang-btn');
+var cvContents=document.querySelectorAll('.cv-lang-content');
+var CV_LANG_KEY='nguyenvankha_cv_lang';
+
+function switchCvLang(lang){
+cvTabs.forEach(function(t){t.classList.toggle('active',t.dataset.lang===lang);});
+cvContents.forEach(function(c){c.classList.remove('active');});
+var target=document.getElementById('cvContent'+(lang==='vi'?'Vi':lang==='en'?'En':'Zh'));
+if(target)target.classList.add('active');
+try{localStorage.setItem(CV_LANG_KEY,lang);}catch(e){}
+}
+
+cvTabs.forEach(function(tab){
+tab.addEventListener('click',function(){
+switchCvLang(this.dataset.lang);
+});
+});
+
+try{
+var savedLang=localStorage.getItem(CV_LANG_KEY);
+if(savedLang)switchCvLang(savedLang);
+}catch(e){}
+
+function setupCvUpload(lang){
+var suffix=lang==='vi'?'Vi':lang==='en'?'En':'Zh';
+var input=document.getElementById('cvInput'+suffix);
+var frame=document.getElementById('cvFrame'+suffix);
+var image=document.getElementById('cvImage'+suffix);
+var uploadBtn=document.getElementById('cvUploadBtn'+suffix);
+var changeBtn=document.getElementById('cvChangeBtn'+suffix);
+var deleteBtn=document.getElementById('cvDeleteBtn'+suffix);
+var actions=document.getElementById('cvActions'+suffix);
+var storageKey='nguyenvankha_cv_image_'+lang;
+
+uploadBtn.addEventListener('click',function(e){
+e.stopPropagation();
+input.click();
+});
+changeBtn.addEventListener('click',function(e){
+e.stopPropagation();
+input.click();
+});
+
+input.addEventListener('change',function(){
+var file=this.files[0];
+if(!file)return;
+if(!file.type.startsWith('image/')){showToast('⚠️ Vui lòng chọn file ảnh!');return;}
+if(file.size>8*1024*1024){showToast('⚠️ Ảnh quá lớn! Vui lòng chọn ảnh dưới 8MB.');return;}
+var reader=new FileReader();
+reader.onload=function(e){
+var dataUrl=e.target.result;
+image.src=dataUrl;
+image.style.display='block';
+frame.classList.add('has-image');
+actions.style.display='flex';
+try{
+localStorage.setItem(storageKey,dataUrl);
+showToast('✅ Đã tải CV '+lang.toUpperCase()+' lên!');
+}catch(err){
+showToast('⚠️ Ảnh quá lớn để lưu, nhưng vẫn hiển thị tạm thời.');
+}
+};
+reader.readAsDataURL(file);
+this.value='';
+});
+
+deleteBtn.addEventListener('click',function(e){
+e.stopPropagation();
+if(!confirm('Bạn có chắc muốn xóa ảnh CV này?'))return;
+image.src='';
+image.style.display='none';
+frame.classList.remove('has-image');
+actions.style.display='none';
+try{localStorage.removeItem(storageKey);}catch(err){}
+showToast('🗑️ Đã xóa ảnh CV!');
+});
+}
+
+setupCvUpload('vi');
+setupCvUpload('en');
+setupCvUpload('zh');
+
+var toast=document.getElementById('toast');
+var toastTimer;
+function showToast(msg){
+toast.textContent=msg;
+toast.classList.add('show');
+clearTimeout(toastTimer);
+toastTimer=setTimeout(function(){toast.classList.remove('show');},2500);
+}
+
+var editModeToggle=document.getElementById('editModeToggle');
+var EDIT_MODE_KEY='nguyenvankha_editmode';
+var TEXT_STORAGE_KEY='nguyenvankha_texts';
+
+function setEditMode(on){
+if(on){document.body.classList.add('edit-mode');editModeToggle.classList.add('active');}
+else{document.body.classList.remove('edit-mode');editModeToggle.classList.remove('active');}
+try{localStorage.setItem(EDIT_MODE_KEY,on?'1':'0');}catch(e){}
+}
+editModeToggle.addEventListener('click',function(){
+var isOn=!document.body.classList.contains('edit-mode');
+setEditMode(isOn);
+showToast(isOn?'✏️ Đã BẬT chế độ chỉnh sửa':'🔒 Đã TẮT chế độ chỉnh sửa');
+});
+
+function saveAllTexts(){
+var texts={};
+document.querySelectorAll('[data-edit-id]').forEach(function(el){
+if(el.tagName==='INPUT'||el.tagName==='TEXTAREA'){texts[el.dataset.editId]=el.value;}
+else{texts[el.dataset.editId]=el.innerHTML;}
+});
+try{localStorage.setItem(TEXT_STORAGE_KEY,JSON.stringify(texts));}catch(err){}
+}
+document.querySelectorAll('[data-edit-id]').forEach(function(el){
+el.addEventListener('input',saveAllTexts);
+el.addEventListener('blur',saveAllTexts);
+});
+function restoreTexts(){
+var raw;
+try{raw=localStorage.getItem(TEXT_STORAGE_KEY);}catch(e){return;}
+if(!raw)return;
+try{
+var texts=JSON.parse(raw);
+Object.keys(texts).forEach(function(id){
+var el=document.querySelector('[data-edit-id="'+id+'"]');
+if(el){
+if(el.tagName==='INPUT'||el.tagName==='TEXTAREA'){el.value=texts[id];}
+else{el.innerHTML=texts[id];}
+}
+});
+}catch(err){}
+}
+try{if(localStorage.getItem(EDIT_MODE_KEY)==='1')setEditMode(true);}catch(e){}
+restoreTexts();
+
+var avatarInput=document.getElementById('avatarInput');
+var heroAvatar=document.getElementById('heroAvatar');
+var AVATAR_KEY='nguyenvankha_avatar';
+
+document.querySelectorAll('.change-avatar-btn').forEach(function(btn){
+btn.addEventListener('click',function(e){
+e.preventDefault();
+e.stopPropagation();
+avatarInput.click();
+});
+});
+
+avatarInput.addEventListener('change',function(){
+var file=this.files[0];
+if(!file)return;
+if(!file.type.startsWith('image/')){showToast('⚠️ Vui lòng chọn file ảnh!');return;}
+if(file.size>5*1024*1024){showToast('⚠️ Ảnh quá lớn! Vui lòng chọn ảnh dưới 5MB.');return;}
+var reader=new FileReader();
+reader.onload=function(e){
+var dataUrl=e.target.result;
+heroAvatar.innerHTML='<img src="'+dataUrl+'" alt="Avatar">';
+try{
+localStorage.setItem(AVATAR_KEY,dataUrl);
+showToast('✅ Đã cập nhật ảnh đại diện!');
+}catch(err){
+showToast('⚠️ Ảnh quá lớn để lưu, nhưng vẫn hiển thị tạm thời.');
+}
+};
+reader.readAsDataURL(file);
+this.value='';
+});
+
+function bindPhotoUpload(wrapperId, photoId, linkId, editBtnId, inputId, storageKey, successMsg){
+var wrapper=document.getElementById(wrapperId);
+var photo=document.getElementById(photoId);
+var link=document.getElementById(linkId);
+var editBtn=document.getElementById(editBtnId);
+var input=document.getElementById(inputId);
+if(!wrapper||!photo||!link||!editBtn||!input)return;
+
+link.addEventListener('click',function(e){
+e.preventDefault();
+e.stopPropagation();
+input.click();
+});
+editBtn.addEventListener('click',function(e){
+e.stopPropagation();
+input.click();
+});
+
+input.addEventListener('change',function(){
+var file=this.files[0];
+if(!file)return;
+if(!file.type.startsWith('image/')){showToast('⚠️ Vui lòng chọn file ảnh!');return;}
+if(file.size>5*1024*1024){showToast('⚠️ Ảnh quá lớn! Vui lòng chọn ảnh dưới 5MB.');return;}
+var reader=new FileReader();
+reader.onload=function(e){
+var dataUrl=e.target.result;
+photo.src=dataUrl;
+photo.style.display='block';
+wrapper.classList.add('has-image');
+try{
+localStorage.setItem(storageKey,dataUrl);
+showToast(successMsg);
+}catch(err){
+showToast('⚠️ Ảnh quá lớn để lưu, nhưng vẫn hiển thị tạm thời.');
+}
+};
+reader.readAsDataURL(file);
+this.value='';
+});
+}
+
+bindPhotoUpload('introPhotoWrapper','introPhoto','introPhotoLink','introPhotoEditBtn','introPhotoInput','nguyenvankha_intro_photo','✅ Đã chèn ảnh quan niệm sống!');
+bindPhotoUpload('aboutIntroPhotoWrapper','aboutIntroPhoto','aboutIntroPhotoLink','aboutIntroPhotoEditBtn','aboutIntroPhotoInput','nguyenvankha_about_intro_photo','✅ Đã chèn ảnh giới thiệu!');
+bindPhotoUpload('contactPhotoWrapper','contactPhoto','contactPhotoLink','contactPhotoEditBtn','contactPhotoInput','nguyenvankha_contact_photo','✅ Đã chèn ảnh liên hệ!');
+bindPhotoUpload('aboutContactPhotoWrapper','aboutContactPhoto','aboutContactPhotoLink','aboutContactPhotoEditBtn','aboutContactPhotoInput','nguyenvankha_about_contact_photo','✅ Đã chèn ảnh liên hệ!');
+bindPhotoUpload('contactPagePhotoWrapper','contactPagePhoto','contactPagePhotoLink','contactPagePhotoEditBtn','contactPagePhotoInput','nguyenvankha_contact_page_photo','✅ Đã chèn ảnh liên hệ!');
+
+bindPhotoUpload('procPhoto1Wrapper','procPhoto1','procPhoto1Link','procPhoto1EditBtn','procPhoto1Input','nguyenvankha_proc_photo_1','✅ Đã chèn ảnh mốc 1!');
+bindPhotoUpload('procPhoto2Wrapper','procPhoto2','procPhoto2Link','procPhoto2EditBtn','procPhoto2Input','nguyenvankha_proc_photo_2','✅ Đã chèn ảnh mốc 2!');
+bindPhotoUpload('procPhoto3Wrapper','procPhoto3','procPhoto3Link','procPhoto3EditBtn','procPhoto3Input','nguyenvankha_proc_photo_3','✅ Đã chèn ảnh mốc 3!');
+bindPhotoUpload('procPhoto4Wrapper','procPhoto4','procPhoto4Link','procPhoto4EditBtn','procPhoto4Input','nguyenvankha_proc_photo_4','✅ Đã chèn ảnh mốc 4!');
+
+bindPhotoUpload('projPhoto1Wrapper','projPhoto1','projPhoto1Link','projPhoto1EditBtn','projPhoto1Input','nguyenvankha_proj_photo_1','✅ Đã chèn ảnh dự án 1!');
+bindPhotoUpload('projPhoto2Wrapper','projPhoto2','projPhoto2Link','projPhoto2EditBtn','projPhoto2Input','nguyenvankha_proj_photo_2','✅ Đã chèn ảnh dự án 2!');
+bindPhotoUpload('projPhoto3Wrapper','projPhoto3','projPhoto3Link','projPhoto3EditBtn','projPhoto3Input','nguyenvankha_proj_photo_3','✅ Đã chèn ảnh dự án 3!');
+
+var heroSection=document.getElementById('heroSection');
+var changeBgBtn=document.getElementById('changeBgBtn');
+var bgPanel=document.getElementById('bgPanel');
+var bgOptions=document.getElementById('bgOptions');
+var uploadBgBtn=document.getElementById('uploadBgBtn');
+var resetAllBgBtn=document.getElementById('resetAllBgBtn');
+var uploadPageBgBtn=document.getElementById('uploadPageBgBtn');
+var bgImageInput=document.getElementById('bgImageInput');
+var pageBgInput=document.getElementById('pageBgInput');
+var BG_KEY='nguyenvankha_bg';
+var BG_IMAGE_KEY='nguyenvankha_bg_image';
+var PAGE_BG_KEY='nguyenvankha_page_bg';
+
+var backgrounds=[
+{name:'Xanh biển',value:'linear-gradient(135deg,#1e3c72,#2a5298)'},
+{name:'Tím mộng',value:'linear-gradient(135deg,#667eea,#764ba2)'},
+{name:'Hồng đào',value:'linear-gradient(135deg,#f093fb,#f5576c)'},
+{name:'Xanh ngọc',value:'linear-gradient(135deg,#11998e,#38ef7d)'},
+{name:'Cam lửa',value:'linear-gradient(135deg,#f12711,#f5af19)'},
+{name:'Đêm tối',value:'linear-gradient(135deg,#232526,#414345)'},
+{name:'Xanh mòng',value:'linear-gradient(135deg,#00b4db,#0083b0)'},
+{name:'Hồng tím',value:'linear-gradient(135deg,#DA22FF,#9733EE)'},
+{name:'Xanh rêu',value:'linear-gradient(135deg,#134E5E,#71B280)'}
+];
+
+backgrounds.forEach(function(bg,index){
+var swatch=document.createElement('div');
+swatch.className='bg-swatch';
+swatch.style.background=bg.value;
+swatch.title=bg.name;
+swatch.dataset.index=index;
+swatch.addEventListener('click',function(){applyGradientBg(index);});
+bgOptions.appendChild(swatch);
+});
+
+function applyGradientBg(index){
+var bg=backgrounds[index];
+heroSection.style.backgroundImage='none';
+heroSection.style.background=bg.value;
+heroSection.classList.remove('using-image');
+try{localStorage.removeItem(BG_IMAGE_KEY);}catch(e){}
+markActiveSwatch(index);
+try{localStorage.setItem(BG_KEY,index);}catch(e){}
+showToast('🎨 Đã đổi nền Hero: '+bg.name);
+}
+function applyImageBg(dataUrl){
+heroSection.style.background='none';
+heroSection.style.backgroundImage='url('+dataUrl+')';
+heroSection.style.backgroundSize='cover';
+heroSection.style.backgroundPosition='center';
+heroSection.classList.add('using-image');
+try{localStorage.removeItem(BG_KEY);}catch(e){}
+document.querySelectorAll('.bg-swatch').forEach(function(s){s.classList.remove('active');});
+}
+function markActiveSwatch(index){
+document.querySelectorAll('.bg-swatch').forEach(function(s){s.classList.remove('active');});
+var el=document.querySelector('.bg-swatch[data-index="'+index+'"]');
+if(el)el.classList.add('active');
+}
+changeBgBtn.addEventListener('click',function(e){
+e.stopPropagation();
+bgPanel.classList.toggle('show');
+});
+document.addEventListener('click',function(e){
+if(!bgPanel.contains(e.target)&&e.target!==changeBgBtn){bgPanel.classList.remove('show');}
+});
+uploadBgBtn.addEventListener('click',function(){bgImageInput.click();});
+bgImageInput.addEventListener('change',function(){
+var file=this.files[0];
+if(!file)return;
+if(!file.type.startsWith('image/')){showToast('⚠️ Vui lòng chọn file ảnh!');return;}
+if(file.size>8*1024*1024){showToast('⚠️ Ảnh quá lớn! Vui lòng chọn ảnh dưới 8MB.');return;}
+var reader=new FileReader();
+reader.onload=function(e){
+var dataUrl=e.target.result;
+applyImageBg(dataUrl);
+try{
+localStorage.setItem(BG_IMAGE_KEY,dataUrl);
+showToast('🖼️ Đã đặt ảnh nền Hero!');
+}catch(err){showToast('⚠️ Ảnh quá lớn để lưu.');}
+};
+reader.readAsDataURL(file);
+this.value='';
+});
+
+uploadPageBgBtn.addEventListener('click',function(){pageBgInput.click();});
+pageBgInput.addEventListener('change',function(){
+var file=this.files[0];
+if(!file)return;
+if(!file.type.startsWith('image/')){showToast('⚠️ Vui lòng chọn file ảnh!');return;}
+if(file.size>10*1024*1024){showToast('⚠️ Ảnh quá lớn! Vui lòng chọn ảnh dưới 10MB.');return;}
+var reader=new FileReader();
+reader.onload=function(e){
+var dataUrl=e.target.result;
+applyPageBg(dataUrl);
+try{
+localStorage.setItem(PAGE_BG_KEY,dataUrl);
+showToast('🌄 Đã đặt ảnh nền cho CẢ TRANG!');
+}catch(err){showToast('⚠️ Ảnh quá lớn để lưu, nhưng vẫn hiển thị tạm thời.');}
+};
+reader.readAsDataURL(file);
+this.value='';
+bgPanel.classList.remove('show');
+});
+
+function applyPageBg(dataUrl){
+document.body.style.backgroundImage='url('+dataUrl+')';
+document.body.style.backgroundSize='cover';
+document.body.style.backgroundPosition='center';
+document.body.style.backgroundAttachment='fixed';
+document.body.style.backgroundRepeat='no-repeat';
+document.body.classList.add('has-bg-image');
+}
+
+resetAllBgBtn.addEventListener('click',function(){
+try{
+localStorage.removeItem(BG_KEY);
+localStorage.removeItem(BG_IMAGE_KEY);
+localStorage.removeItem(PAGE_BG_KEY);
+}catch(e){}
+heroSection.style.backgroundImage='none';
+heroSection.style.background=backgrounds[0].value;
+heroSection.classList.remove('using-image');
+markActiveSwatch(0);
+document.body.style.backgroundImage='none';
+document.body.classList.remove('has-bg-image');
+showToast('↺ Đã xóa tất cả nền (Hero + toàn trang)');
+});
+
+function restoreImage(storageKey, photoId, wrapperId){
+try{
+var saved=localStorage.getItem(storageKey);
+if(saved){
+var photo=document.getElementById(photoId);
+var wrapper=document.getElementById(wrapperId);
+if(photo&&wrapper){
+photo.src=saved;
+photo.style.display='block';
+wrapper.classList.add('has-image');
+}
+}
+}catch(e){}
+}
+
+function restoreAll(){
+restoreImage('nguyenvankha_avatar','heroAvatar',null);
+if(localStorage.getItem('nguyenvankha_avatar')){
+heroAvatar.innerHTML='<img src="'+localStorage.getItem('nguyenvankha_avatar')+'" alt="Avatar">';
+}
+
+restoreImage('nguyenvankha_intro_photo','introPhoto','introPhotoWrapper');
+restoreImage('nguyenvankha_about_intro_photo','aboutIntroPhoto','aboutIntroPhotoWrapper');
+restoreImage('nguyenvankha_contact_photo','contactPhoto','contactPhotoWrapper');
+restoreImage('nguyenvankha_about_contact_photo','aboutContactPhoto','aboutContactPhotoWrapper');
+restoreImage('nguyenvankha_contact_page_photo','contactPagePhoto','contactPagePhotoWrapper');
+
+restoreImage('nguyenvankha_proc_photo_1','procPhoto1','procPhoto1Wrapper');
+restoreImage('nguyenvankha_proc_photo_2','procPhoto2','procPhoto2Wrapper');
+restoreImage('nguyenvankha_proc_photo_3','procPhoto3','procPhoto3Wrapper');
+restoreImage('nguyenvankha_proc_photo_4','procPhoto4','procPhoto4Wrapper');
+
+restoreImage('nguyenvankha_proj_photo_1','projPhoto1','projPhoto1Wrapper');
+restoreImage('nguyenvankha_proj_photo_2','projPhoto2','projPhoto2Wrapper');
+restoreImage('nguyenvankha_proj_photo_3','projPhoto3','projPhoto3Wrapper');
+
+/* Khôi phục ảnh CV */
+try{
+var cvVi=localStorage.getItem('nguyenvankha_cv_image_vi');
+if(cvVi){var imgVi=document.getElementById('cvImageVi');var frameVi=document.getElementById('cvFrameVi');var actionsVi=document.getElementById('cvActionsVi');imgVi.src=cvVi;imgVi.style.display='block';frameVi.classList.add('has-image');actionsVi.style.display='flex';}
+}catch(e){}
+try{
+var cvEn=localStorage.getItem('nguyenvankha_cv_image_en');
+if(cvEn){var imgEn=document.getElementById('cvImageEn');var frameEn=document.getElementById('cvFrameEn');var actionsEn=document.getElementById('cvActionsEn');imgEn.src=cvEn;imgEn.style.display='block';frameEn.classList.add('has-image');actionsEn.style.display='flex';}
+}catch(e){}
+try{
+var cvZh=localStorage.getItem('nguyenvankha_cv_image_zh');
+if(cvZh){var imgZh=document.getElementById('cvImageZh');var frameZh=document.getElementById('cvFrameZh');var actionsZh=document.getElementById('cvActionsZh');imgZh.src=cvZh;imgZh.style.display='block';frameZh.classList.add('has-image');actionsZh.style.display='flex';}
+}catch(e){}
+
+/* Khôi phục ảnh nền cho từng section */
+['home','about','hobby','timeline','projects','cv','contact'].forEach(function(sec){
+try{
+var saved=localStorage.getItem('nguyenvankha_section_bg_'+sec);
+if(saved)applySectionBg(sec,saved);
+}catch(e){}
+});
+
+try{
+var savedBgImage=localStorage.getItem(BG_IMAGE_KEY);
+if(savedBgImage){
+applyImageBg(savedBgImage);
+}else{
+var savedBg=localStorage.getItem(BG_KEY);
+if(savedBg!==null){
+var idx=parseInt(savedBg);
+var bg=backgrounds[idx]||backgrounds[0];
+heroSection.style.background=bg.value;
+heroSection.classList.remove('using-image');
+markActiveSwatch(idx);
+}else{
+markActiveSwatch(0);
+}
+}
+}catch(e){markActiveSwatch(0);}
+
+try{
+var savedPageBg=localStorage.getItem(PAGE_BG_KEY);
+if(savedPageBg){
+applyPageBg(savedPageBg);
+}
+}catch(e){}
+}
+
+if(document.readyState==='loading'){
+document.addEventListener('DOMContentLoaded',restoreAll);
+}else{
+restoreAll();
+}
+
+})();
+</script>
+</body>
+</html>
